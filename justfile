@@ -50,9 +50,8 @@ watch: _ensure_node_modules
 @_tsc +args="":
     {{tsc}} {{args}}
 
-# Run tests
-test:
-    just ../worker/test
+# Run tests (only type check currently)
+test: check
 
 # Develop:
 #   1. just dev
