@@ -40,7 +40,7 @@ export default defineConfig(({ mode }) => ({
         // chunkFileNames: '[name]-[hash].js',
         // assetFileNames: '[name]-[hash][extname]',
       },
-      external: [],
+      external: ["@chakra-ui/react", '@metapages/metapage', "@metapages/metaframe-hook", "react", "react-dom", "react-router-dom", "react-icons"],
       plugins: [
         typescriptPaths({
           preserveExtensions: true,
