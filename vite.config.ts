@@ -29,18 +29,27 @@ export default defineConfig(({ mode }) => ({
     lib: {
       entry: path.resolve(__dirname, "src/lib/index.ts"),
       formats: ["es"],
-      fileName: (format) => `index.${format === 'es' ? 'js' : format}`,
+      fileName: (format) => `index.${format === "es" ? "js" : format}`,
     },
     rollupOptions: {
       output: {
-        entryFileNames: '[name].js',
-        chunkFileNames: '[name].js',
+        entryFileNames: "[name].js",
+        chunkFileNames: "[name].js",
         // Make sure to keep separate files for imports
         // entryFileNames: '[name].js',
         // chunkFileNames: '[name]-[hash].js',
         // assetFileNames: '[name]-[hash][extname]',
       },
-      external: ["@chakra-ui/react", '@metapages/metapage', "react", "react-dom", "react-router-dom", "react-icons"],
+      external: [
+        "@chakra-ui/react",
+        "@metapages/metapage",
+        "react",
+        "react-dom",
+        "react-router-dom",
+        "react-icons",
+        "@react-typed-hooks/use-key-press",
+        "@phosphor-icons/react",
+      ],
       plugins: [
         typescriptPaths({
           preserveExtensions: true,
