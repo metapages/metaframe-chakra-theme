@@ -1,30 +1,38 @@
-import React, { useCallback, useEffect } from "react";
-import { useKeyPress } from "@react-typed-hooks/use-key-press";
+import React, {
+  useCallback,
+  useEffect,
+} from 'react';
+
 import {
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Icon,
-  useDisclosure,
-  Text,
   Container,
   HStack,
-} from "@chakra-ui/react";
-import { TrashSimple } from "@phosphor-icons/react";
+  Icon,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalOverlay,
+  Text,
+  Tooltip,
+  useDisclosure,
+} from '@chakra-ui/react';
+import { useKeyPress } from '@react-typed-hooks/use-key-press';
 
-// Delete icon with a confirmation modal
-export const ButtonDeleteWithConfirm: React.FC<{
+export const IconButtonWithConfirm: React.FC<{
+  tooltip?: string;
   callback: () => void;
   modalHeader?: string;
   iconColor?: string;
-}> = ({ callback, iconColor, modalHeader = "Confirm deletion?" }) => {
+  confirmButtonText?: string;
+  confirmButtonColor?: string;
+  buttonIcon?: React.ComponentType;
+  ariaLabel: string;
+}> = ({ tooltip, ariaLabel, buttonIcon, callback, iconColor, modalHeader = "Confirm?", confirmButtonText = "Confirm", confirmButtonColor = "red" }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const onClickDelete = useCallback(() => {
+  const onClickConfirm = useCallback(() => {
     callback();
     onClose();
   }, [callback, onClose]);
@@ -39,7 +47,9 @@ export const ButtonDeleteWithConfirm: React.FC<{
 
   return (
     <>
-      <Icon color={iconColor} as={TrashSimple} aria-label="delete" onClick={onOpen} />
+      <Tooltip label={tooltip}>
+        <Icon color={iconColor} as={buttonIcon} aria-label={ariaLabel} onClick={onOpen} />
+      </Tooltip>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -56,8 +66,8 @@ export const ButtonDeleteWithConfirm: React.FC<{
               <Button colorScheme="gray" onClick={onClose} size="sm">
                 Cancel
               </Button>
-              <Button colorScheme="red" onClick={onClickDelete} size="sm">
-                Delete
+              <Button colorScheme={confirmButtonColor} onClick={onClickConfirm} size="sm">
+                {confirmButtonText}
               </Button>
             </HStack>
           </ModalFooter>

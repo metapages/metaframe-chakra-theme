@@ -1,7 +1,7 @@
 {
   "name": "@metapages/metaframe-chakra-theme",
   "private": false,
-  "version": "0.0.9",
+  "version": "0.0.16",
   "repository": {
     "type": "git",
     "url": "https://github.com/metapages/metaframe-chakra-theme"
@@ -27,7 +27,6 @@
   },
   "peerDependencies": {
     "@chakra-ui/react": "2.x",
-    "@metapages/metapage": "1.x",
     "@react-typed-hooks/use-key-press": "1.x",
     "react": "18.x",
     "react-dom": "18.x",
